@@ -25,9 +25,9 @@ import java.util.ArrayList;
 
 public class MyProfile extends AppCompatActivity {
 
-    ListView listView1, listView2;
+    /*ListView listView1, listView2, listView3;
     MyCustomAdapter myCustomAdapter;
-    MyCustomAdapter2 myCustomAdapter2;
+    MyCustomAdapter2 myCustomAdapter2;*/
     ArrayList<DataModel> dataModels;
     Toolbar toolbar;
     //ImageView imageView1, imageView2;
@@ -54,7 +54,7 @@ public class MyProfile extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar_prf);
         toolbar.setTitle("My Profile");
-        //toolbar.setTitleTextColor(getColor(R.color.colorBlack));
+        toolbar.setTitleTextColor(getColor(R.color.colorBlack));
 
         setSupportActionBar(toolbar);
 
@@ -63,20 +63,12 @@ public class MyProfile extends AppCompatActivity {
 
         dataModels = new ArrayList<>();
 
-        listView1 = (ListView)findViewById(R.id.list_view1);
-        myCustomAdapter = new MyCustomAdapter(this, R.layout.sample_layout_profile, dataModels);
-        listView1.setAdapter(myCustomAdapter);
-
-        listView2 = (ListView)findViewById(R.id.list_view2);
-        myCustomAdapter2 = new MyCustomAdapter2(this, R.layout.sample_layout_address, dataModels);
-        listView2.setAdapter(myCustomAdapter2);
-
         ImageView imageView1 = (ImageView)findViewById(R.id.img_edit1);
-        ImageView imageView2 = (ImageView)findViewById(R.id.img_edit2);
+        ImageView imageView2 = (ImageView)findViewById(R.id.img_edit12);
 
-        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        imageView1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MyProfile.this);
                 builder.setMessage("Do you want to update Contact Info?").setCancelable(true).
                         setPositiveButton("YES", new DialogInterface.OnClickListener() {
@@ -93,19 +85,19 @@ public class MyProfile extends AppCompatActivity {
                 });
                 AlertDialog alt = builder.create();
                 alt.show();
-                //Toast.makeText(getApplicationContext(), "Problem", Toast.LENGTH_SHORT).show();
             }
         });
 
-        listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        imageView2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MyProfile.this);
-                builder.setMessage("Do you want to update Address Info?").setCancelable(false).
+                builder.setMessage("Do you want to update Contact Info?").setCancelable(true).
                         setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                showUpdateDialog_address(MyProfile.this);
+                                //dialog.cancel();
+                                showUpdateDialog_contact(MyProfile.this);
                             }
                         }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
                     @Override
@@ -113,8 +105,8 @@ public class MyProfile extends AppCompatActivity {
                         dialog.cancel();
                     }
                 });
-                AlertDialog alertDialog = builder.create();
-;               alertDialog.show();
+                AlertDialog alt = builder.create();
+                alt.show();
             }
         });
 
