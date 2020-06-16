@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
     Button button;
     EditText phone, password;
     public static Activity actv;
-
+    SharedPreferences sharedPreferences;
+    private final String DEFAULT="N/A";
 
     @Override
     public void onBackPressed() {
@@ -71,27 +72,20 @@ public class MainActivity extends AppCompatActivity {
         phone = (EditText)findViewById(R.id.editText);
         password = (EditText)findViewById(R.id.editText2);
 
-
         text = (TextView)findViewById(R.id.textView);
         text.setPaintFlags(text.getPaintFlags()|Paint.UNDERLINE_TEXT_FLAG);
 
-        try {
-            File f = getApplicationContext().getFileStreamPath("Key.txt");
+        sharedPreferences=getSharedPreferences("AppData", Context.MODE_PRIVATE);
+        String phone=sharedPreferences.getString("Phone",DEFAULT);
+        String password=sharedPreferences.getString("Password",DEFAULT);
 
-            if (f.exists()) {
-                text.setText(null);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
+        if(phone.compareTo(DEFAULT)==0 && password.compareTo(DEFAULT)==0){
+            signUp();
+        }
+        else{
+           text.setText(null);
         }
 
-        text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), Sign_up_contact.class);
-                startActivity(i);
-            }
-        });
 
         button = (Button)findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
@@ -107,38 +101,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void signUp() {
+        text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), Sign_up_contact.class);
+                startActivity(i);
+            }
+        });
+    }
+
     public void authenticate()
     {
         String user_phone, user_password, f_phone=null, f_password=null, f_id=null;
-
-        try {
-            FileInputStream fist1 = openFileInput("Phone.txt");
-            FileInputStream fist2 = openFileInput("Password.txt");
-
-            InputStreamReader ist1 = new InputStreamReader(fist1);
-            InputStreamReader ist2 = new InputStreamReader(fist2);
-
-            BufferedReader bfr1 = new BufferedReader(ist1);
-            BufferedReader bfr2 = new BufferedReader(ist2);
-
-            String line1, line2;
-            StringBuffer stb1 = new StringBuffer();
-            StringBuffer stb2 = new StringBuffer();
-
-            while((line1=bfr1.readLine())!=null){
-                stb1.append(line1);
-            }
-            while((line2=bfr2.readLine())!=null){
-                stb2.append(line2);
-            }
-
-            f_phone = stb1.toString();
-            f_password = stb2.toString();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         user_phone = phone.getText().toString().trim();
         user_password = password.getText().toString().trim();
@@ -159,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
             }
             else {
                 while(cursor.moveToNext()){
-                    f_id = cursor.getString(0);
                     f_phone = cursor.getString(2);
                     f_password = cursor.getString(4);
                 }
@@ -173,12 +147,12 @@ public class MainActivity extends AppCompatActivity {
                 {
                     Intent i = new Intent(getApplicationContext(), MenuActivity.class);
 
-                    SharedPreferences sharedPreferences = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
+                    /*SharedPreferences sharedPreferences = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("UserID", f_id);
                     editor.putString("UserPhone", f_phone);
                     editor.putString("UserPassword", f_password);
-                    editor.apply();
+                    editor.apply();*/
 
                     startActivity(i);
                     finish();

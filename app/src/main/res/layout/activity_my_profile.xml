@@ -55,13 +55,14 @@
                         android:id="@+id/sample_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Name"
+                        android:text="Name:: "
                         android:textSize="15sp" />
+
                     <TextView
                         android:id="@+id/sample_mobile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Mobile No."
+                        android:text="Phone no:: "
                         android:textSize="15sp" />
 
                     <ImageView
@@ -92,23 +93,39 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Contact Info"
-                        android:textSize="20sp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Address Info"
                         android:textColor="@color/colorAccent"
-                        android:layout_marginBottom="10dp"/>
+                        android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/sample_name2"
+                        android:id="@+id/sample_house"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Name"
+                        android:text="House:: "
                         android:textSize="15sp" />
+
                     <TextView
-                        android:id="@+id/sample_mobile2"
+                        android:id="@+id/sample_road"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Mobile No."
+                        android:text="Road:: "
                         android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/sample_sector"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Sector/Block:: "
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/sample_area"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Area:: "
+                        android:textSize="15sp" />
+
 
                     <ImageView
                         android:id="@+id/img_edit12"

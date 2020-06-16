@@ -76,8 +76,19 @@ public class UserDB extends SQLiteOpenHelper {
     }
 
     public Cursor readAll(String SELECT_ALL){
-        //String SELECT_ALL="SELECT * FROM "+TABLE_NAME+" WHERE "+PHONE+" = '"+phn+"'";
         SQLiteDatabase sql = this.getReadableDatabase();
         return sql.rawQuery(SELECT_ALL, null);
+    }
+
+    public int updateTB(String un, String upn, String ueml, String upass, String phone){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(USERNAME, un);
+        contentValues.put(PHONE, upn);
+        contentValues.put(EMAIL, ueml);
+        contentValues.put(PASSWORD, upass);
+
+        return sqLiteDatabase.update(TABLE_NAME, contentValues, PHONE+"=?",new String[]{phone});
     }
 }

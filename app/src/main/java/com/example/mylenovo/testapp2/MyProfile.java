@@ -7,18 +7,18 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Build;
+import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -32,6 +32,13 @@ public class MyProfile extends AppCompatActivity {
     Toolbar toolbar;
     //ImageView imageView1, imageView2;
     Context context;
+    TextView text_name, text_phone, text_house, text_road, text_block, text_area;
+    TextInputLayout userName, userEmail, userPhone, userPassword;
+    String username, userphone, useremail, userpass, phone_no;
+    String query, TABLE_NAME, PHONE;
+    UserDB db;
+    SharedPreferences sharedPreferences;
+    String name, email, phone, password, house, street, block, area;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -51,10 +58,16 @@ public class MyProfile extends AppCompatActivity {
             window.setStatusBarColor(this.getResources().getColor(R.color.colorAccent));
         }
 
+        text_name = findViewById(R.id.sample_name);
+        text_phone=findViewById(R.id.sample_mobile);
+        text_house=findViewById(R.id.sample_house);
+        text_road=findViewById(R.id.sample_road);
+        text_block=findViewById(R.id.sample_sector);
+        text_area=findViewById(R.id.sample_area);
 
         toolbar = findViewById(R.id.toolbar_prf);
         toolbar.setTitle("My Profile");
-        toolbar.setTitleTextColor(getColor(R.color.colorBlack));
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorBlack));
 
         setSupportActionBar(toolbar);
 
@@ -97,7 +110,7 @@ public class MyProfile extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //dialog.cancel();
-                                showUpdateDialog_contact(MyProfile.this);
+                                showUpdateDialog_address(MyProfile.this);
                             }
                         }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
                     @Override
@@ -110,27 +123,37 @@ public class MyProfile extends AppCompatActivity {
             }
         });
 
-        SharedPreferences sharedPreferences = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
-        String phone_no = sharedPreferences.getString("UserPhone", "DatanotFound");
+        sharedPreferences = getSharedPreferences("AppData", Context.MODE_PRIVATE);
+        phone_no = sharedPreferences.getString("Phone", "DatanotFound");
 
         System.out.print(phone_no);
-        String TABLE_NAME="User_Info";
-        String PHONE="Phone";
-        String query = "SELECT * FROM "+TABLE_NAME+" WHERE "+PHONE+" = '"+phone_no+"'";
-        dataModels.add(new DataModel("dl", "32894", "jrg", "kjr", "rh"));
+        TABLE_NAME="User_Info";
+        PHONE="Phone";
+        query = "SELECT * FROM "+TABLE_NAME+" WHERE "+PHONE+" = '"+phone_no+"'";
 
-        /*UserDB db = new UserDB(this);
+        db = new UserDB(this);
         Cursor cursor = db.readAll(query);
 
         while(cursor.moveToNext()){
-            String name=cursor.getString(1);
-            String phone=cursor.getString(2);
-            String house=cursor.getString(5);
-            String street=cursor.getString(6);
-            String area=cursor.getString(7);
+            name=cursor.getString(1);
+            phone=cursor.getString(2);
+            email=cursor.getString(3);
+            password=cursor.getString(4);
+            house=cursor.getString(5);
+            street=cursor.getString(6);
+            block=cursor.getString(8);
+            area=cursor.getString(7);
 
-            dataModels.add(new DataModel(name, phone, house, street, area));
-        }*/
+            dataModels.add(new DataModel(name, phone, house, street, block, area));
+        }
+
+        text_name.setText("Name::  "+dataModels.get(0).getName_user());
+        text_phone.setText("Phone::  "+dataModels.get(0).getMobile_no());
+        text_house.setText("House::  "+dataModels.get(0).getHouse_no());
+        text_road.setText("Road::  "+dataModels.get(0).getStreet_name());
+        text_block.setText("Block::  "+dataModels.get(0).getBlock());
+        text_area.setText("Sector::  "+dataModels.get(0).getArea());
+
     }
 
     public void showUpdateDialog_contact(Activity activity){
@@ -144,11 +167,70 @@ public class MyProfile extends AppCompatActivity {
 
         dialog1.show();
 
+        userName = dialog1.findViewById(R.id.userName);
+        userEmail = dialog1.findViewById(R.id.userEmail);
+        userPhone = dialog1.findViewById(R.id.userPhone);
+        userPassword = dialog1.findViewById(R.id.userPassword);
+
+        phone_no = sharedPreferences.getString("Phone", "DatanotFound");
+
+        query = "SELECT * FROM "+TABLE_NAME+" WHERE "+PHONE+" = '"+phone_no+"'";
+
+        db = new UserDB(this);
+        Cursor cursor = db.readAll(query);
+
+        while(cursor.moveToNext()){
+            name=cursor.getString(1);
+            phone=cursor.getString(2);
+            email=cursor.getString(3);
+            password=cursor.getString(4);
+        }
+
+        userName.getEditText().setText(name);
+        userEmail.getEditText().setText("N/A");
+        userPhone.getEditText().setText(phone);
+        userPassword.getEditText().setText(password);
+
         Button btn = dialog1.findViewById(R.id.update);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                username=userName.getEditText().getText().toString().trim();
+                userphone=userPhone.getEditText().getText().toString().trim();
+                useremail=userEmail.getEditText().getText().toString().trim();
+                userpass=userPassword.getEditText().getText().toString().trim();
+
+                int val=db.updateTB(username, userphone, useremail, userpass, phone_no);
+
+                if(val>0){
+                    query = "SELECT * FROM "+TABLE_NAME+" WHERE "+PHONE+" = '"+userphone+"'";
+                    Cursor cursor = db.readAll(query);
+                    String name=null, phone=null, email=null;
+
+                    while(cursor.moveToNext()){
+                        name=cursor.getString(1);
+                        phone=cursor.getString(2);
+                        email=cursor.getString(3);
+                        password=cursor.getString(4);
+                    }
+
+                    text_name.setText("Name::  "+name);
+                    text_phone.setText("Phone::  "+phone);
+
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("Phone", userphone);
+                    editor.putString("Password",password);
+
+                    editor.commit();
+
+                    Toast.makeText(getApplicationContext(), "Updated Successfully", Toast.LENGTH_SHORT).show();
+                }
+
+                else
+                    Toast.makeText(getApplicationContext(), "Updation Failed!!", Toast.LENGTH_SHORT).show();
+
                 dialog1.dismiss();
             }
         });
@@ -163,6 +245,16 @@ public class MyProfile extends AppCompatActivity {
         int width = (int)(activity.getResources().getDisplayMetrics().widthPixels*0.95);
         int height = (int)(activity.getResources().getDisplayMetrics().widthPixels*1.5);
         dialog2.getWindow().setLayout(width, height);
+
+        TextInputLayout userHouse = dialog2.findViewById(R.id.house);
+        TextInputLayout userStreet = dialog2.findViewById(R.id.street);
+        AutoCompleteTextView userArea = dialog2.findViewById(R.id.area);
+        TextInputLayout userSector = dialog2.findViewById(R.id.block);
+
+        userHouse.getEditText().setText(dataModels.get(0).getHouse_no());
+        userStreet.getEditText().setText(dataModels.get(0).getStreet_name());
+        userArea.setText(dataModels.get(0).getArea());
+        userSector.getEditText().setText(dataModels.get(0).getBlock());
 
         dialog2.show();
 

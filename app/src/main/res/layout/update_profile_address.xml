@@ -110,7 +110,7 @@
         app:layout_constraintVertical_bias="0.79" />
 
     <AutoCompleteTextView
-        android:id="@+id/autoCompleteTextView"
+        android:id="@+id/area"
         android:layout_width="259dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

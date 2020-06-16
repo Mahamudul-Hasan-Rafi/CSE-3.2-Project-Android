@@ -2,6 +2,7 @@ package com.example.mylenovo.testapp2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.support.design.widget.TextInputLayout;
@@ -34,6 +35,7 @@ public class Sign_up_address extends AppCompatActivity {
 
     FirebaseDatabase contactInfo = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = contactInfo.getReference();
+    SharedPreferences sharedPreferences;
 
     private final String[] area = new String[]{"Motijheel", "Adabar", "Azampur", "Badda", "Bangshal", "Bimanbandar",
     "Cantonment", "Chowkbazar", "Dhanmondi", "Gulshan", "Hazaribagh", "Kalabagan", "Khilgao", "Khilkhet", "Kotwali",
@@ -112,7 +114,7 @@ public class Sign_up_address extends AppCompatActivity {
             String key = databaseReference.push().getKey();
             databaseReference.child(key).setValue(info);
 
-            try {
+            /*try {
                 FileOutputStream fout1 = openFileOutput("Phone.txt", Context.MODE_PRIVATE);
                 FileOutputStream fout2 = openFileOutput("Password.txt", Context.MODE_PRIVATE);
                 FileOutputStream fout3 = openFileOutput("Key.txt", Context.MODE_PRIVATE);
@@ -126,7 +128,14 @@ public class Sign_up_address extends AppCompatActivity {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
+            //SharedPreferences
+            sharedPreferences = getSharedPreferences("AppData", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("Phone", phone);
+            editor.putString("Password", password);
+
+            editor.commit();
 
            //SQLiteDatabase
             UserDB user = new UserDB(this);

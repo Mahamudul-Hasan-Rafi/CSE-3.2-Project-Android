@@ -6,14 +6,24 @@ public class DataModel {
     private String house_no;
     private String street_name;
     private String area;
+    private String block;
 
-    public DataModel(String name_user, String mobile_no, String house_no, String street_name, String area) {
+    public DataModel(String name_user, String mobile_no, String house_no, String street_name, String sector, String area) {
         this.name_user = name_user;
         this.mobile_no = mobile_no;
         this.house_no = house_no;
         this.street_name = street_name;
+        this.block=sector;
         this.area = area;
     }
+
+    public String getBlock() {
+        return block;
+    }
+
+    /*public void setBlock(String block) {
+        this.block = block;
+    }*/
 
     public String getName_user() {
         return name_user;

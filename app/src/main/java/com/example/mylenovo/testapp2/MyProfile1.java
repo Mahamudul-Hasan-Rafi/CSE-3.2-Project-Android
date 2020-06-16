@@ -1,6 +1,7 @@
 package com.example.mylenovo.testapp2;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.view.GravityCompat;
@@ -9,13 +10,17 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.Window;
 
-public class MyProfile1 extends AppCompatActivity {
+public class MyProfile1 extends AppCompatActivity implements View.OnClickListener {
 
    Toolbar toolbar;
    DrawerLayout drawerLayout;
+   CardView personal;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +30,9 @@ public class MyProfile1 extends AppCompatActivity {
             Window window = this.getWindow();
             window.setStatusBarColor(this.getResources().getColor(R.color.colorYellowlight));
         }
+
+        personal = (CardView)findViewById(R.id.personal);
+        personal.setOnClickListener(this);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_profile);
 
@@ -51,5 +59,16 @@ public class MyProfile1 extends AppCompatActivity {
         else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.personal:{
+                startActivity(new Intent(this, MyProfile.class));
+                break;
+            }
+        }
+
     }
 }

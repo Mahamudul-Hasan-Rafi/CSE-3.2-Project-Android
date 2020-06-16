@@ -76,7 +76,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
                     case R.id.profile:{
-                        Intent i = new Intent(getApplicationContext(), MyProfile.class);
+                        Intent i = new Intent(getApplicationContext(), MyProfile1.class);
                         startActivity(i);
                         /*if(drawerLayout.isDrawerOpen(GravityCompat.START)){
                             drawerLayout.closeDrawer(GravityCompat.START);
