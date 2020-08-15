@@ -91,4 +91,16 @@ public class UserDB extends SQLiteOpenHelper {
 
         return sqLiteDatabase.update(TABLE_NAME, contentValues, PHONE+"=?",new String[]{phone});
     }
+
+    public int updateTB2(String house, String road, String block, String area, String phone){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(HOUSE, house);
+        contentValues.put(ROAD, road);
+        contentValues.put(SECTOR, block);
+        contentValues.put(AREA, area);
+
+        return sqLiteDatabase.update(TABLE_NAME, contentValues, PHONE+"=?",new String[]{phone});
+    }
 }

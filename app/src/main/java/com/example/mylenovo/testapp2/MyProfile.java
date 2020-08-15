@@ -34,11 +34,11 @@ public class MyProfile extends AppCompatActivity {
     Context context;
     TextView text_name, text_phone, text_house, text_road, text_block, text_area;
     TextInputLayout userName, userEmail, userPhone, userPassword;
-    String username, userphone, useremail, userpass, phone_no;
+    String username, userphone, useremail, userpass, phone_no, userhouse, userroad, userarea, usersector;
     String query, TABLE_NAME, PHONE;
     UserDB db;
     SharedPreferences sharedPreferences;
-    String name, email, phone, password, house, street, block, area;
+    String id, name, email, phone, password, house, street, block, area;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -151,8 +151,8 @@ public class MyProfile extends AppCompatActivity {
         text_phone.setText("Phone::  "+dataModels.get(0).getMobile_no());
         text_house.setText("House::  "+dataModels.get(0).getHouse_no());
         text_road.setText("Road::  "+dataModels.get(0).getStreet_name());
-        text_block.setText("Block::  "+dataModels.get(0).getBlock());
-        text_area.setText("Sector::  "+dataModels.get(0).getArea());
+        text_block.setText("Sector/Block::  "+dataModels.get(0).getBlock());
+        text_area.setText("Area::  "+dataModels.get(0).getArea());
 
     }
 
@@ -180,6 +180,7 @@ public class MyProfile extends AppCompatActivity {
         Cursor cursor = db.readAll(query);
 
         while(cursor.moveToNext()){
+            id=cursor.getString(0);
             name=cursor.getString(1);
             phone=cursor.getString(2);
             email=cursor.getString(3);
@@ -246,10 +247,10 @@ public class MyProfile extends AppCompatActivity {
         int height = (int)(activity.getResources().getDisplayMetrics().widthPixels*1.5);
         dialog2.getWindow().setLayout(width, height);
 
-        TextInputLayout userHouse = dialog2.findViewById(R.id.house);
-        TextInputLayout userStreet = dialog2.findViewById(R.id.street);
-        AutoCompleteTextView userArea = dialog2.findViewById(R.id.area);
-        TextInputLayout userSector = dialog2.findViewById(R.id.block);
+        final TextInputLayout userHouse = dialog2.findViewById(R.id.house);
+        final TextInputLayout userStreet = dialog2.findViewById(R.id.street);
+        final AutoCompleteTextView userArea = dialog2.findViewById(R.id.area);
+        final TextInputLayout userSector = dialog2.findViewById(R.id.block);
 
         userHouse.getEditText().setText(dataModels.get(0).getHouse_no());
         userStreet.getEditText().setText(dataModels.get(0).getStreet_name());
@@ -263,6 +264,38 @@ public class MyProfile extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                userhouse=userHouse.getEditText().getText().toString().trim();
+                userroad=userStreet.getEditText().getText().toString().trim();
+                usersector=userSector.getEditText().getText().toString().trim();
+                userarea=userArea.getText().toString().trim();
+
+                String phn = sharedPreferences.getString("Phone","DataNotFound");
+                int val = db.updateTB2(userhouse, userroad, usersector, userarea, phn);
+
+                if(val>0){
+                    String q="SELECT * FROM "+TABLE_NAME+" WHERE "+PHONE+" = '"+phn+"'";
+
+                    Cursor cr = db.readAll(query);
+
+                    while(cr.moveToNext()){
+                        house=cr.getString(5);
+                        street=cr.getString(6);
+                        block=cr.getString(8);
+                        area=cr.getString(7);
+                    }
+
+                    text_house.setText("House::  "+house);
+                    text_road.setText("Road::  "+street);
+                    text_block.setText("Sector/Block::  "+block);
+                    text_area.setText("Area::  "+area);
+
+                    Toast.makeText(getApplicationContext(), "Updated Successfully", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Updation Failed !!", Toast.LENGTH_SHORT).show();
+                }
+
                 dialog2.dismiss();
             }
         });
