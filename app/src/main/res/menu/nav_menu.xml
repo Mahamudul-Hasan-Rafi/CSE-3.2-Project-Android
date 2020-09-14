@@ -26,10 +26,12 @@
 
     <item android:title="Communication">
         <menu>
-            <item
-                android:id="@+id/share"
-                android:icon="@drawable/ic_share_black_24dp"
-                android:title="Share" />
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/admin"
+                    android:icon="@drawable/ic_home_black_24dp"
+                    android:title="Admin" />
+            </group>
         </menu>
     </item>
 

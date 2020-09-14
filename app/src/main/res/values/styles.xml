@@ -13,4 +13,21 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="TextLabel" parent="TextAppearance.AppCompat">
+        <item name="android:textColorHint">#9c9595</item>
+        <item name="android:textSize">18sp</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlNormal">#747171</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+    </style>
+    <style name="styleToast">
+        <item name="iconLeft">@drawable/ic_warning</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="strokeColor">#000000</item>
+        <item name="cornerRadius">15dp</item>
+        <item name="colorBackground">#faa640</item>
+        <item name="textColor">#000000</item>
+        <item name="length">LONG</item>
+    </style>
+
 </resources>
