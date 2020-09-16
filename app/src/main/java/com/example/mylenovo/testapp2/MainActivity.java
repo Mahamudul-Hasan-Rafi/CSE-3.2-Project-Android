@@ -122,6 +122,12 @@ public class MainActivity extends AppCompatActivity {
             System.out.print("Give phone no. and password !!"+"\n");
         }
 
+        else if(user_phone.equals("admin") && user_password.equals("admin")){
+            Intent i = new Intent(MainActivity.this, AdminActivity.class);
+            startActivity(i);
+            finish();
+        }
+
         else{
 
             UserDB usdb = new UserDB(this);

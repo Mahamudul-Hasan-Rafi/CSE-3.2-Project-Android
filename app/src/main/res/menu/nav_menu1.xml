@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/Admin_Home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Home" />
+        <item
+            android:id="@+id/WasteManager"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Waste Manager" />
+        <item
+            android:id="@+id/StaffManager"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Staff Manager" />
+        <item
+            android:id="@+id/Transaction"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Transactions" />
+        <item
+            android:id="@+id/RecyclingTips"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Recycling Tips" />
+    </group>
+
+    <item android:title="Communication">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/logout"
+                    android:icon="@drawable/ic_home_black_24dp"
+                    android:title="Logout" />
+            </group>
+        </menu>
+    </item>
+
+</menu>

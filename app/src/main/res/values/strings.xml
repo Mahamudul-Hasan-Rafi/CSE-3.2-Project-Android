@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TestApp2</string>
+    <string name="app_name">testapp2</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_menu2">Menu2Activity</string>
@@ -8,4 +8,5 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="profile">Profile</string>
+    <string name="soft_name">Waste &amp; Craft</string>
 </resources>

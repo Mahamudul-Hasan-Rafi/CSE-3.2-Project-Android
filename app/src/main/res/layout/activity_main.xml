@@ -14,7 +14,7 @@
         android:background="@drawable/edit_text_round"
         android:ems="10"
         android:hint="Mobile No."
-        android:inputType="phone"
+        android:inputType="text"
         android:paddingLeft="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/cardView"
@@ -36,7 +36,8 @@
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintStart_toStartOf="@+id/cardView"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.75" />
+        app:layout_constraintVertical_bias="0.75"
+        />
 
     <Button
         android:id="@+id/button"
