@@ -22,13 +22,12 @@
 
         </activity>
         <activity android:name=".SplashActivity">
-
-
+            <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
 
         </activity>
         <activity android:name=".Sign_up_address">
@@ -97,7 +96,12 @@
             </intent-filter>-->
         </activity>
         <activity android:name=".AdminActivity" />
-        <activity android:name=".WasteProduct_Manager" />
+        <activity android:name=".WasteProduct_Manager">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Staff_Manager" />
         <activity android:name=".RecyclingTips_Manager"></activity>
     </application>
