@@ -49,7 +49,6 @@ public class Sign_up_contact extends AppCompatActivity {
         if(Build.VERSION.SDK_INT>=21){
             Window window = this.getWindow();
             window.setStatusBarColor(this.getResources().getColor(R.color.colorAccent));
-
         }
     }
     public void regcontact(){
