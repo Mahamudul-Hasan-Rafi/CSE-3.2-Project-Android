@@ -1,7 +1,9 @@
 package com.example.mylenovo.testapp2;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -27,6 +29,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     android.support.v7.widget.Toolbar toolbar;
     NavigationView nav;
     CardView my_profile, recycling_product, selling, purchase;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +55,11 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         toolbar.setTitle("Home");
-        toolbar.setTitleTextColor(getColor(R.color.colorBlack));
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorBlack));
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open,
                                         R.string.navigation_drawer_close);
-        toggle.getDrawerArrowDrawable().setColor(getColor(R.color.colorPrimaryDark));
+        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.colorPrimaryDark));
         drawerLayout.addDrawerListener(toggle);
 
         toggle.syncState();
@@ -76,11 +79,43 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
                     case R.id.profile:{
-                        Intent i = new Intent(getApplicationContext(), MyProfile1.class);
+                        Intent i = new Intent(getApplicationContext(), MyProfile.class);
                         startActivity(i);
                         /*if(drawerLayout.isDrawerOpen(GravityCompat.START)){
                             drawerLayout.closeDrawer(GravityCompat.START);
                         }*/
+                        break;
+                    }
+                    case R.id.logout:{
+                        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+                            drawerLayout.closeDrawer(GravityCompat.START);
+                        }
+
+                        AlertDialog.Builder builder= new AlertDialog.Builder(MenuActivity.this);
+
+                        builder.setMessage("Are you sure want to Log Out?").setCancelable(false).
+                                setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        sharedPreferences = getSharedPreferences("AppData", Context.MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        editor.remove("Phone");
+                                        editor.remove("Password");
+                                        editor.clear();
+                                        editor.commit();
+                                        Intent startMain = new Intent(MenuActivity.this, MainActivity.class);
+                                        startActivity(startMain);
+                                        finish();
+
+                                    }
+                                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                        AlertDialog a = builder.create();
+                        a.show();
                         break;
                     }
                 }
@@ -124,9 +159,24 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         Intent i;
         switch (v.getId()){
             case R.id.profile_menu:
-                    i=new Intent(this, MyProfile1.class);
+                    i=new Intent(this, MyProfile.class);
                     startActivity(i);
                     break;
+            case R.id.sell_menu:
+                i=new Intent(this, Sell_Menu.class);
+                i.putExtra("SELL", "TRUE");
+                startActivity(i);
+                break;
+            case R.id.purchase_menu:
+                i=new Intent(this, Sell_Menu.class);
+                i.putExtra("SELL", "FALSE");
+                startActivity(i);
+                break;
+            case R.id.recycle_menu:
+                i=new Intent(this, Recycling_Tips.class);
+                startActivity(i);
+                break;
+
         }
     }
 }

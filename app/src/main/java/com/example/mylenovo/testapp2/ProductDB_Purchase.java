@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
-public class ProductDB extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME="MyDatabase_Selling_Product.db";
+public class ProductDB_Purchase extends SQLiteOpenHelper {
+    private static final String DATABASE_NAME="MyDatabase_Purchasing_Product.db";
     private static final String TABLE_NAME="ProductTable";
     private static final String ID="_PID";
     private static final String NAME="Product_Name";
@@ -22,7 +22,7 @@ public class ProductDB extends SQLiteOpenHelper {
             NAME+" INTEGER NOT NULL, "+TYPE+" VARCHAR(50) NOT NULL, "+PRICE_UNIT+" VARCHAR(50) NOT NULL);";
 
 
-    public ProductDB(Context context) {
+    public ProductDB_Purchase(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
         this.context=context;
     }

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="50dp"
+    android:gravity=""
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Transaction"
+        android:layout_gravity="center"
+        android:textSize="30sp"
+        android:textColor="@color/colorAccent"
+        android:layout_marginBottom="40dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/date_time"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp"
+        android:layout_gravity="start"
+        android:layout_marginBottom="10dp"/>
+    <TextView
+        android:id="@+id/date_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Waste Materials:  "
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/waste_mat"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp"
+        android:layout_gravity="start"
+        android:layout_marginBottom="10dp"/>
+    <TextView
+        android:id="@+id/materials"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Waste Materials:  "
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/service_prov"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp"
+        android:layout_gravity="start"
+        android:layout_marginBottom="10dp"/>
+    <TextView
+        android:id="@+id/service_provider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Waste Materials:  "
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="50dp"/>
+
+    <Button
+        android:id="@+id/add_transaction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_add"
+        android:text="Complete   Transaction"
+        android:textColor="#fff"/>
+
+</LinearLayout>

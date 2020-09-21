@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:openDrawer=""
-    tools:context=".Staff_Manager"
+    tools:context=".WasteProduct_Manager"
     >
 
     <android.support.v7.widget.LinearLayoutCompat
@@ -20,7 +20,7 @@
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorAccent"
+            android:background="@color/colorYellow"
             android:id="@+id/tlbar2"
             android:title="Home"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
@@ -32,28 +32,29 @@
         <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="3dp"
+                android:padding="5dp"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Stuff Members"
+                    android:text="My List"
                     android:layout_gravity="center"
                     android:layout_marginBottom="15dp"
                     android:textColor="@color/colorAccent"
                     android:textSize="20sp"
                     android:fontFamily="@font/amaranth"/>
                 <ListView
-                    android:id="@+id/stuff_list"
+                    android:id="@+id/waste_products"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:dividerHeight="1dp"
+                    android:dividerHeight="3dp"
                     android:divider="#f4f0f0"
                     android:padding="0dp"
                     >
@@ -62,13 +63,13 @@
             </LinearLayout>
 
             <android.support.design.widget.FloatingActionButton
-                android:id="@+id/add_product"
+                android:id="@+id/next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:fabSize="normal"
                 android:layout_gravity="end|bottom"
                 android:layout_margin="30dp"
-                android:src="@drawable/ic_add_24dp"
+                android:src="@drawable/ic_navigate_next_24dp"
                 />
 
         </android.support.design.widget.CoordinatorLayout>
@@ -77,8 +78,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:id="@+id/nav1"
-        app:headerLayout="@layout/nav_header1"
-        app:menu="@menu/nav_menu1">
+        android:id="@+id/nav"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nav_menu">
     </android.support.design.widget.NavigationView>
 </android.support.v4.widget.DrawerLayout>

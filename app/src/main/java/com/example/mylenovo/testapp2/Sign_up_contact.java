@@ -84,7 +84,7 @@ public class Sign_up_contact extends AppCompatActivity {
             reg_cpass.requestFocus();
             return;
         }
-        else if(phone.length()!=11){
+        /*else if(phone.length()!=11){
             reg_phone.setError("Wrong phone number!!");
             reg_phone.requestFocus();
             return;
@@ -93,7 +93,7 @@ public class Sign_up_contact extends AppCompatActivity {
             reg_phone.setError("Wrong phone number!!");
             reg_phone.requestFocus();
             return;
-        }
+        }*/
         else{
             Intent i = new Intent(getApplicationContext(), Sign_up_address.class);
             i.putExtra("Username", username);

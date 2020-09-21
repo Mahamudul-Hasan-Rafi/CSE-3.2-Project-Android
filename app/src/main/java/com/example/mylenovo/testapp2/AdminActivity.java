@@ -3,6 +3,7 @@ package com.example.mylenovo.testapp2;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -142,6 +143,11 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                 i=new Intent(this, RecyclingTips_Manager.class);
                 startActivity(i);
                 finish();
+                break;
+            case R.id.show_transactions:
+                Uri uri = Uri.parse("https://console.firebase.google.com/u/0/project/testapp2-5f5b1/database/testapp2-5f5b1/data");
+                i=new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(i);
                 break;
         }
     }

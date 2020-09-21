@@ -35,7 +35,7 @@ public class Sign_up_address extends AppCompatActivity {
 
     FirebaseDatabase contactInfo = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = contactInfo.getReference();
-    SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferences, sharedPreferences2;
 
     private final String[] area = new String[]{"Motijheel", "Adabar", "Azampur", "Badda", "Bangshal", "Bimanbandar",
     "Cantonment", "Chowkbazar", "Dhanmondi", "Gulshan", "Hazaribagh", "Kalabagan", "Khilgao", "Khilkhet", "Kotwali",
@@ -111,8 +111,8 @@ public class Sign_up_address extends AppCompatActivity {
             ContactInfo info = new ContactInfo(username, email, phone, house, street, territory, block);
 
             //FirebaseDatabase
-            String key = databaseReference.push().getKey();
-            databaseReference.child(key).setValue(info);
+            /*String key = databaseReference.push().getKey();
+            databaseReference.child(key).setValue(info);*/
 
             /*try {
                 FileOutputStream fout1 = openFileOutput("Phone.txt", Context.MODE_PRIVATE);
@@ -136,6 +136,15 @@ public class Sign_up_address extends AppCompatActivity {
             editor.putString("Password", password);
 
             editor.commit();
+
+            sharedPreferences2 = getSharedPreferences("UserData", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor2 = sharedPreferences2.edit();
+            editor2.putString("Name", username);
+            editor2.putString("ContactNo.", phone);
+            editor2.putString("Email", email);
+            editor2.putString("Address", "House: "+house+", Road: "+street+", Block: "+block+", Area: "+territory);
+
+            editor2.commit();
 
            //SQLiteDatabase
             UserDB user = new UserDB(this);

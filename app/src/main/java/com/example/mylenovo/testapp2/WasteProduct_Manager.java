@@ -59,7 +59,7 @@ public class WasteProduct_Manager extends AppCompatActivity {
 
         listView = findViewById(R.id.waste_products);
 
-        update_button = (Button) findViewById(R.id.product_update);
+        //update_button = (Button) findViewById(R.id.product_delete);
 
 
         floatingActionButton = findViewById(R.id.add_product);

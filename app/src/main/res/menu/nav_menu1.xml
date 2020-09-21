@@ -8,31 +8,16 @@
             android:title="Home" />
         <item
             android:id="@+id/WasteManager"
-            android:icon="@drawable/ic_home_black_24dp"
+            android:icon="@drawable/ic_merge_24dp"
             android:title="Waste Manager" />
         <item
             android:id="@+id/StaffManager"
-            android:icon="@drawable/ic_home_black_24dp"
-            android:title="Staff Manager" />
-        <item
-            android:id="@+id/Transaction"
-            android:icon="@drawable/ic_home_black_24dp"
-            android:title="Transactions" />
+            android:icon="@drawable/ic_group_add24dp"
+            android:title="Staff Manager"/>
         <item
             android:id="@+id/RecyclingTips"
-            android:icon="@drawable/ic_home_black_24dp"
+            android:icon="@drawable/ic_sync_24dp"
             android:title="Recycling Tips" />
     </group>
-
-    <item android:title="Communication">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/logout"
-                    android:icon="@drawable/ic_home_black_24dp"
-                    android:title="Logout" />
-            </group>
-        </menu>
-    </item>
 
 </menu>

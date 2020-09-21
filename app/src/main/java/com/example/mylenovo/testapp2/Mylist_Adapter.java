@@ -10,27 +10,28 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomAdapter_Product extends BaseAdapter implements Filterable {
+public class Mylist_Adapter extends BaseAdapter implements Filterable {
 
     Activity context;
     List<ProductInfo> productInfos;
     List<ProductInfo> filterList;
-    DatabaseReference dRef;
+    String SELL;
 
-    public CustomAdapter_Product(Activity context, List<ProductInfo> objects) {
+    public Mylist_Adapter(Activity context, List<ProductInfo> objects, String sell) {
         this.context=context;
         this.productInfos=objects;
         this.filterList = objects;
+        this.SELL=sell;
     }
 
     @Override
@@ -49,15 +50,15 @@ public class CustomAdapter_Product extends BaseAdapter implements Filterable {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         LayoutInflater inflater = context.getLayoutInflater();
-        View view = inflater.inflate(R.layout.product_layout, null, false);
+        View view = inflater.inflate(R.layout.mylist_layout, null, false);
 
         TextView product_name = view.findViewById(R.id.product_name);
         TextView product_type = view.findViewById(R.id.product_type);
         TextView price_unit = view.findViewById(R.id.price_unit);
-        Button delete = view.findViewById(R.id.product_delete);
+        ImageView img_button = view.findViewById(R.id.img_clear);
 
         final ProductInfo productInfo = productInfos.get(position);
 
@@ -65,12 +66,44 @@ public class CustomAdapter_Product extends BaseAdapter implements Filterable {
         product_type.setText("Type:  "+productInfo.getP_type());
         price_unit.setText("Price/Unit:  "+productInfo.getPrice_unit());
 
-        delete.setOnClickListener(new View.OnClickListener() {
+        img_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dRef = FirebaseDatabase.getInstance().getReference("Product");
-                String name = productInfo.getP_name();
-                dRef.child(name).removeValue();
+                /*DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("Users");
+                String key = databaseReference.push().getKey();
+                databaseReference.child(key).child("Name").setValue(productInfo);
+                Toast.makeText(context, "Helllo", Toast.LENGTH_SHORT).show();*/
+                /*ProductDB productDB = new ProductDB(context);
+                long id=productDB.insertData(productInfo.getP_name(), productInfo.getP_type(), productInfo.getPrice_unit());
+                Toast.makeText(context, "Item Added Succesfully!", Toast.LENGTH_SHORT).show();*/
+
+                if(SELL.equals("TRUE")){
+                    ProductDB productDB = new ProductDB(context);
+                    int d = productDB.deleteRecord(productInfo.getP_name());
+
+                    if(d>0){
+                        productInfos.remove(position);
+                        Toast.makeText(context, "Item Deleted Succesfully!", Toast.LENGTH_SHORT).show();
+                        context.finish();
+                        context.startActivity(context.getIntent());
+                    }
+
+                }
+                else{
+                    ProductDB_Purchase productDB_purchase = new ProductDB_Purchase(context);
+                    int d = productDB_purchase.deleteRecord(productInfo.getP_name());
+
+                    Toast.makeText(context, "I am here", Toast.LENGTH_SHORT).show();
+
+                    if(d>0){
+                        productInfos.remove(position);
+                        Toast.makeText(context, "Item Deleted Succesfully!", Toast.LENGTH_SHORT).show();
+                        context.finish();
+                        context.startActivity(context.getIntent());
+                    }
+                }
+
+
             }
         });
 

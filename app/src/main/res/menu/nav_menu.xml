@@ -8,31 +8,21 @@
             android:title="Home" />
         <item
             android:id="@+id/profile"
-            android:icon="@drawable/ic_home_black_24dp"
+            android:icon="@drawable/ic_person24dp"
             android:title="Profile" />
         <item
-            android:id="@+id/recycling"
-            android:icon="@drawable/ic_home_black_24dp"
-            android:title="Recycling" />
+            android:id="@+id/selling_transaction"
+            android:icon="@drawable/ic_local_shipping24dp"
+            android:title="Sold Items" />
         <item
-            android:id="@+id/sell"
-            android:icon="@drawable/ic_home_black_24dp"
-            android:title="Selling" />
+            android:id="@+id/purchasing_transaction"
+            android:icon="@drawable/ic_local_shipping24dp"
+            android:title="Purchased Items" />
         <item
-            android:id="@+id/buy"
-            android:icon="@drawable/ic_home_black_24dp"
-            android:title="Purchasing" />
-    </group>
+            android:id="@+id/logout"
+            android:icon="@drawable/ic_keyboard_24dp"
+            android:title="LogOut" />
 
-    <item android:title="Communication">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/admin"
-                    android:icon="@drawable/ic_home_black_24dp"
-                    android:title="Admin" />
-            </group>
-        </menu>
-    </item>
+    </group>
 
 </menu>
