@@ -39,5 +39,8 @@ After **Successful Building on Android Studio** pressing the **run** button will
 ## Contributing
 Waste_Craft: github.com/Mahamudul-Hasan-Rafi/Waste_Craft
 
+## Important point
+**Internet connection** is necessary as products and waste materials are shown from remote database and for admin to upload or delete any product from database
+
 ## Contact
 **raficse30@gmail.com**
