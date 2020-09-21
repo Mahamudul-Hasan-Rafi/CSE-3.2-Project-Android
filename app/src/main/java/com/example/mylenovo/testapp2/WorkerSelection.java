@@ -59,6 +59,19 @@ public class WorkerSelection extends AppCompatActivity {
                 }
                 customWorkerAdapter = new CustomWorkerAdapter(stuff_infoList,WorkerSelection.this, sell);
                 listView.setAdapter(customWorkerAdapter);
+
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String s) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String s) {
+                        customWorkerAdapter.getFilter().filter(s);
+                        return false;
+                    }
+                });
             }
 
             @Override
@@ -78,50 +91,96 @@ public class WorkerSelection extends AppCompatActivity {
         toolbar.setTitle("Workers Selection");
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorBlack));
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open,
+        /*ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close);
         toggle.getDrawerArrowDrawable().setColor(Color.parseColor("#000000"));
         drawerLayout.addDrawerListener(toggle);
 
-        toggle.syncState();
+        toggle.syncState();*/
 
         nav = findViewById(R.id.nav);
         nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
-                    /*case R.id.Admin_Home:{
-                        Intent i = new Intent(getApplicationContext(), AdminActivity.class);
+                    case R.id.home:{
+                        Intent i = new Intent(getApplicationContext(), MenuActivity.class);
                         startActivity(i);
                         finish();
+                        /*if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+                            drawerLayout.closeDrawer(GravityCompat.START);
+                        }*/
                         break;
                     }
 
-                    case R.id.WasteManager:{
+                    case R.id.profile:{
+                        Intent i = new Intent(getApplicationContext(), MyProfile.class);
+                        startActivity(i);
+                        finish();
+                        /*if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+                            drawerLayout.closeDrawer(GravityCompat.START);
+                        }*/
+                        break;
+                    }
+                    /*case R.id.logout:{
                         if(drawerLayout.isDrawerOpen(GravityCompat.START)){
                             drawerLayout.closeDrawer(GravityCompat.START);
                         }
 
-                        break;
-                    }
+                        AlertDialog.Builder builder= new AlertDialog.Builder(Selling_Transaction.this);
 
-                    case R.id.StaffManager:{
-                        Intent i = new Intent(getApplicationContext(), Staff_Manager.class);
-                        startActivity(i);
-                        finish();
-                        break;
-                    }
+                        builder.setMessage("Are you sure want to Log Out?").setCancelable(false).
+                                setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        sharedPreferences = getSharedPreferences("AppData", Context.MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        editor.remove("Phone");
+                                        editor.remove("Password");
+                                        editor.clear();
+                                        editor.commit();
+                                        Intent startMain = new Intent(Selling_Transaction.this, MainActivity.class);
+                                        startActivity(startMain);
+                                        finish();
 
-                    case R.id.RecyclingTips:{
-                        Intent i = new Intent(getApplicationContext(), RecyclingTips_Manager.class);
-                        startActivity(i);
-                        finish();
+                                    }
+                                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                        AlertDialog a = builder.create();
+                        a.show();
                         break;
                     }*/
+                    case R.id.selling_transaction:{
+                        Intent i = new Intent(getApplicationContext(), Selling_Transaction.class);
+                        startActivity(i);
+                        finish();
+                        /*if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+                            drawerLayout.closeDrawer(GravityCompat.START);
+                        }*/
+                        break;
+                    }
+                    case R.id.purchasing_transaction:{
+                        Intent i = new Intent(getApplicationContext(), Purchasing_Transaction.class);
+                        startActivity(i);
+                        finish();
+                        /*if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+                            drawerLayout.closeDrawer(GravityCompat.START);
+                        }*/
+                        break;
+                    }
                 }
                 return true;
             }
         });
 
+    }
+    public void onBackPressed() {
+        Intent i = new Intent(getApplicationContext(), MenuActivity.class);
+        startActivity(i);
+        finish();
     }
 }

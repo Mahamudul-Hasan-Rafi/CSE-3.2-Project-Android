@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Build;
@@ -55,7 +56,7 @@ public class MyProfile extends AppCompatActivity {
 
         if(Build.VERSION.SDK_INT>=21){
             Window window = this.getWindow();
-            window.setStatusBarColor(this.getResources().getColor(R.color.colorAccent));
+            window.setStatusBarColor(this.getResources().getColor(R.color.colorYellowlight));
         }
 
         text_name = findViewById(R.id.sample_name);
@@ -68,11 +69,6 @@ public class MyProfile extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar_prf);
         toolbar.setTitle("My Profile");
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorBlack));
-
-        setSupportActionBar(toolbar);
-
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         dataModels = new ArrayList<>();
 
@@ -299,5 +295,10 @@ public class MyProfile extends AppCompatActivity {
                 dialog2.dismiss();
             }
         });
+    }
+    public void onBackPressed() {
+        Intent i = new Intent(getApplicationContext(), MenuActivity.class);
+        startActivity(i);
+        finish();
     }
 }

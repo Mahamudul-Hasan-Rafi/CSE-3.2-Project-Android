@@ -17,7 +17,7 @@
         <item
             android:id="@+id/RecyclingTips"
             android:icon="@drawable/ic_sync_24dp"
-            android:title="Recycling Tips" />
+            android:title="Recycled Products" />
     </group>
 
 </menu>

@@ -54,7 +54,7 @@
                     android:id="@+id/search_worker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:queryHint="Search product"
+                    app:queryHint="Search in your area"
                     app:iconifiedByDefault="false"
                     android:padding="10dp">
                 </android.support.v7.widget.SearchView>
@@ -79,6 +79,6 @@
         android:layout_gravity="start"
         android:id="@+id/nav"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/nav_menu">
+        app:menu="@menu/nav_menu2">
     </android.support.design.widget.NavigationView>
 </android.support.v4.widget.DrawerLayout>

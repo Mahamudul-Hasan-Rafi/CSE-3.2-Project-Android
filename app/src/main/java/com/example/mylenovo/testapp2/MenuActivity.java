@@ -36,6 +36,8 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        final Context context=this;
+
         my_profile = findViewById(R.id.profile_menu);
         recycling_product = findViewById(R.id.recycle_menu);
         selling = findViewById(R.id.sell_menu);
@@ -81,6 +83,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                     case R.id.profile:{
                         Intent i = new Intent(getApplicationContext(), MyProfile.class);
                         startActivity(i);
+                        finish();
                         /*if(drawerLayout.isDrawerOpen(GravityCompat.START)){
                             drawerLayout.closeDrawer(GravityCompat.START);
                         }*/
@@ -97,12 +100,10 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                                 setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        sharedPreferences = getSharedPreferences("AppData", Context.MODE_PRIVATE);
-                                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                                        editor.remove("Phone");
-                                        editor.remove("Password");
-                                        editor.clear();
-                                        editor.commit();
+                                        sharedPreferences = context.getSharedPreferences("AppData", Context.MODE_PRIVATE);
+                                        sharedPreferences.edit().remove("Phone").commit();
+                                        sharedPreferences.edit().remove("Password").commit();
+
                                         Intent startMain = new Intent(MenuActivity.this, MainActivity.class);
                                         startActivity(startMain);
                                         finish();
@@ -118,6 +119,34 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                         a.show();
                         break;
                     }
+                    case R.id.selling_transaction:{
+                        Intent i = new Intent(getApplicationContext(), Selling_Transaction.class);
+                        startActivity(i);
+                        finish();
+                        /*if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+                            drawerLayout.closeDrawer(GravityCompat.START);
+                        }*/
+                        break;
+                    }
+                    case R.id.purchasing_transaction:{
+                        Intent i = new Intent(getApplicationContext(), Purchasing_Transaction.class);
+                        startActivity(i);
+                        finish();
+                        /*if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+                            drawerLayout.closeDrawer(GravityCompat.START);
+                        }*/
+                        break;
+                    }
+                    case R.id.RecyclingTips:{
+                        Intent i = new Intent(getApplicationContext(), Recycling_Tips.class);
+                        startActivity(i);
+                        finish();
+                        /*if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+                            drawerLayout.closeDrawer(GravityCompat.START);
+                        }*/
+                        break;
+                    }
+
                 }
                 return true;
             }
@@ -151,7 +180,12 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void cancel(){
-       super.onBackPressed();
+        Intent startMain = new Intent(Intent.ACTION_MAIN);
+        startMain.addCategory(Intent.CATEGORY_HOME);
+        startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startMain.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(startMain);
+        finish();
     }
 
     @Override

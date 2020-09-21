@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(Build.VERSION.SDK_INT>=21){
             window = this.getWindow();
-            window.setStatusBarColor(this.getResources().getColor(R.color.colorAccent));
+            window.setStatusBarColor(this.getResources().getColor(R.color.colorYellowlight));
         }
     }
 

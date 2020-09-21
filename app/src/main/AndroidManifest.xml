@@ -141,13 +141,13 @@
         <activity android:name=".MyItemsList" />
         <activity android:name=".WorkerSelection">
 
-            <!--
-            <intent-filter>
+
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            -->
+            </intent-filter>-->
+
         </activity>
         <activity android:name=".Selling_Transaction" />
         <activity android:name=".Purchasing_Transaction"></activity>

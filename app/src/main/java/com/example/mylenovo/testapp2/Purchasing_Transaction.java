@@ -1,12 +1,18 @@
 package com.example.mylenovo.testapp2;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -24,6 +30,7 @@ public class Purchasing_Transaction extends AppCompatActivity {
     DrawerLayout drawerLayout;
     NavigationView nav;
     Toolbar toolbar;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,39 +60,88 @@ public class Purchasing_Transaction extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
-                    /*case R.id.Admin_Home:{
-                        Intent i = new Intent(getApplicationContext(), AdminActivity.class);
+                    case R.id.home:{
+                        Intent i = new Intent(getApplicationContext(), MenuActivity.class);
                         startActivity(i);
                         finish();
+                        /*if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+                            drawerLayout.closeDrawer(GravityCompat.START);
+                        }*/
                         break;
                     }
 
-                    case R.id.WasteManager:{
+                    case R.id.profile:{
+                        Intent i = new Intent(getApplicationContext(), MyProfile.class);
+                        startActivity(i);
+                        finish();
+                        /*if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+                            drawerLayout.closeDrawer(GravityCompat.START);
+                        }*/
+                        break;
+                    }
+                    /*case R.id.logout:{
                         if(drawerLayout.isDrawerOpen(GravityCompat.START)){
                             drawerLayout.closeDrawer(GravityCompat.START);
                         }
 
-                        break;
-                    }
+                        AlertDialog.Builder builder= new AlertDialog.Builder(Purchasing_Transaction.this);
 
-                    case R.id.StaffManager:{
-                        Intent i = new Intent(getApplicationContext(), Staff_Manager.class);
-                        startActivity(i);
-                        finish();
-                        break;
-                    }
+                        builder.setMessage("Are you sure want to Log Out?").setCancelable(false).
+                                setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        sharedPreferences = getSharedPreferences("AppData", Context.MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        editor.remove("Phone");
+                                        editor.remove("Password");
+                                        editor.clear();
+                                        editor.commit();
+                                        Intent startMain = new Intent(Purchasing_Transaction.this, MainActivity.class);
+                                        startActivity(startMain);
+                                        finish();
 
-                    case R.id.RecyclingTips:{
-                        Intent i = new Intent(getApplicationContext(), RecyclingTips_Manager.class);
-                        startActivity(i);
-                        finish();
+                                    }
+                                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                        AlertDialog a = builder.create();
+                        a.show();
                         break;
                     }*/
+                    case R.id.selling_transaction:{
+                        Intent i = new Intent(getApplicationContext(), Selling_Transaction.class);
+                        startActivity(i);
+                        finish();
+                        /*if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+                            drawerLayout.closeDrawer(GravityCompat.START);
+                        }*/
+                        break;
+                    }
+                    case R.id.purchasing_transaction:{
+                        /*Intent i = new Intent(getApplicationContext(), Purchasing_Transaction.class);
+                        startActivity(i);*/
+                        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+                            drawerLayout.closeDrawer(GravityCompat.START);
+                        }
+                        break;
+                    }
+                    case R.id.RecyclingTips:{
+                        Intent i = new Intent(getApplicationContext(), Recycling_Tips.class);
+                        startActivity(i);
+                        finish();
+                        /*if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+                            drawerLayout.closeDrawer(GravityCompat.START);
+                        }*/
+                        break;
+                    }
+
                 }
                 return true;
             }
         });
-
         tableLayout = findViewById(R.id.table);
 
         Purchased_ItemsDB purchased_itemsDB = new Purchased_ItemsDB(this);
@@ -124,5 +180,11 @@ public class Purchasing_Transaction extends AppCompatActivity {
 
             record_length++;
         }
+    }
+
+    public void onBackPressed() {
+        Intent i = new Intent(getApplicationContext(), MenuActivity.class);
+        startActivity(i);
+        finish();
     }
 }

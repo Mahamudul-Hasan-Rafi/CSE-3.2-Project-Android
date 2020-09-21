@@ -22,11 +22,6 @@
             android:id="@+id/RecyclingTips"
             android:icon="@drawable/ic_sync_24dp"
             android:title="Recycled Products" />
-        <item
-            android:id="@+id/logout"
-            android:icon="@drawable/ic_keyboard_24dp"
-            android:title="LogOut" />
-
     </group>
 
 </menu>

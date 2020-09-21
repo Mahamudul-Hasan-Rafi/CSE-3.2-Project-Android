@@ -78,12 +78,12 @@ public class Sell_Menu extends AppCompatActivity {
         toolbar.setTitle("Waste Products");
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorBlack));
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open,
+       /* ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close);
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.colorPrimaryDark));
         drawerLayout.addDrawerListener(toggle);
 
-        toggle.syncState();
+        toggle.syncState();*/
 
         nav = findViewById(R.id.nav);
         nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -91,17 +91,69 @@ public class Sell_Menu extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
                     case R.id.home:{
-                        //Intent i = new Intent(getApplicationContext(), MenuActivity.class);
-                        //startActivity(i);
-                        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+                        Intent i = new Intent(getApplicationContext(), MenuActivity.class);
+                        startActivity(i);
+                        finish();
+                        /*if(drawerLayout.isDrawerOpen(GravityCompat.START)){
                             drawerLayout.closeDrawer(GravityCompat.START);
-                        }
+                        }*/
                         break;
                     }
 
                     case R.id.profile:{
-                        Intent i = new Intent(getApplicationContext(), MyProfile1.class);
+                        Intent i = new Intent(getApplicationContext(), MyProfile.class);
                         startActivity(i);
+                        finish();
+                        /*if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+                            drawerLayout.closeDrawer(GravityCompat.START);
+                        }*/
+                        break;
+                    }
+                    /*case R.id.logout:{
+                        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+                            drawerLayout.closeDrawer(GravityCompat.START);
+                        }
+
+                        AlertDialog.Builder builder= new AlertDialog.Builder(Selling_Transaction.this);
+
+                        builder.setMessage("Are you sure want to Log Out?").setCancelable(false).
+                                setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        sharedPreferences = getSharedPreferences("AppData", Context.MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        editor.remove("Phone");
+                                        editor.remove("Password");
+                                        editor.clear();
+                                        editor.commit();
+                                        Intent startMain = new Intent(Selling_Transaction.this, MainActivity.class);
+                                        startActivity(startMain);
+                                        finish();
+
+                                    }
+                                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                        AlertDialog a = builder.create();
+                        a.show();
+                        break;
+                    }*/
+                    case R.id.selling_transaction:{
+                        Intent i = new Intent(getApplicationContext(), Selling_Transaction.class);
+                        startActivity(i);
+                        finish();
+                        /*if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+                            drawerLayout.closeDrawer(GravityCompat.START);
+                        }*/
+                        break;
+                    }
+                    case R.id.purchasing_transaction:{
+                        Intent i = new Intent(getApplicationContext(), Purchasing_Transaction.class);
+                        startActivity(i);
+                        finish();
                         /*if(drawerLayout.isDrawerOpen(GravityCompat.START)){
                             drawerLayout.closeDrawer(GravityCompat.START);
                         }*/
@@ -146,6 +198,10 @@ public class Sell_Menu extends AppCompatActivity {
             }
         });
         super.onStart();
+    }
+    public void onBackPressed() {
+        super.onBackPressed();
+        //finish();
     }
 
 }

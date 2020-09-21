@@ -174,13 +174,19 @@ public class Staff_Manager extends AppCompatActivity {
                 String contact = stuff_phone.getEditText().getText().toString().trim();
                 String area = stuff_area.getEditText().getText().toString().trim();
 
-                Stuff_Info stuffInfo = new Stuff_Info(name, mail, contact, area);
+                if(area.isEmpty()){
+                    Toast.makeText(Staff_Manager.this, "Stuff Coverage Area can't be empty", Toast.LENGTH_SHORT).show();
+                }
+                else {
 
-                databaseReference.child(name).setValue(stuffInfo);
+                    Stuff_Info stuffInfo = new Stuff_Info(name, mail, contact, area);
 
-                Toast.makeText(Staff_Manager.this, "Added Succesfully", Toast.LENGTH_SHORT).show();
+                    databaseReference.child(name).setValue(stuffInfo);
 
-                dialog.cancel();
+                    Toast.makeText(Staff_Manager.this, "Added Succesfully", Toast.LENGTH_SHORT).show();
+
+                    dialog.cancel();
+                }
             }
         });
     }

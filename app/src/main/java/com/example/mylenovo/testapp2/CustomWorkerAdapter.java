@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,15 +26,17 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class CustomWorkerAdapter extends BaseAdapter {
+public class CustomWorkerAdapter extends BaseAdapter implements Filterable {
     List<Stuff_Info> stuff_infoList;
+    List<Stuff_Info> filter_stuff_list;
     Activity context;
     String SELL;
     DatabaseReference databaseReference;
-    SharedPreferences sharedPreferences1,sharedPreferences2, sharedPreferences3;
+    SharedPreferences sharedPreferences1,sharedPreferences2;
 
     public CustomWorkerAdapter(List<Stuff_Info> stuff_infoList, Activity context, String sell) {
         this.stuff_infoList = stuff_infoList;
+        this.filter_stuff_list=stuff_infoList;
         this.context = context;
         SELL = sell;
     }
@@ -257,4 +261,42 @@ public class CustomWorkerAdapter extends BaseAdapter {
         }
 
     }
+
+    @Override
+    public Filter getFilter() {
+        return new CustomizeFilter();
+    }
+
+    class CustomizeFilter extends Filter{
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults filterResults = new FilterResults();
+            ArrayList<Stuff_Info> filter = new ArrayList<>();
+
+            if(constraint!=null && constraint.length()>0){
+                String cons = constraint.toString().toUpperCase();
+                for(int i=0; i<filter_stuff_list.size(); i++){
+                    if(filter_stuff_list.get(i).getStuff_area().toUpperCase().contains(cons)){
+                        filter.add(filter_stuff_list.get(i));
+                    }
+                    filterResults.values=filter;
+                    filterResults.count=filter.size();
+                }
+            }
+            else{
+                filterResults.values=filter_stuff_list;
+                filterResults.count=filter_stuff_list.size();
+            }
+
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            stuff_infoList = (ArrayList<Stuff_Info>)results.values;
+            notifyDataSetChanged();
+        }
+    }
+
 }
